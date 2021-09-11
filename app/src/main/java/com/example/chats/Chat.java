@@ -5,7 +5,6 @@ public class Chat {
     String text;
 
     public Chat(String text){
-
         this.text = text;
 
     }
