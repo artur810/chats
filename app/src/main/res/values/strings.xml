@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">chats</string>
+    <string name="enter_message">הכנס הודעה</string>
+    <string name="send">שלח</string>
 </resources>

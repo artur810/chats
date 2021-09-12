@@ -1,10 +1,16 @@
 package com.example.chats;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
@@ -14,6 +20,7 @@ public class chatPage extends AppCompatActivity {
 
     Button buttonSend;
     EditText textSend;
+    Toolbar toolbar;
     RecyclerView recyclerview;
     public List<Message> chats;
     private RecyclerViewAdapter adapter;
@@ -28,6 +35,8 @@ public class chatPage extends AppCompatActivity {
 
         buttonSend = findViewById(R.id.buttonSend);
         textSend = findViewById(R.id.textSend);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         buttonSend.setOnClickListener( v -> {
 
@@ -41,6 +50,19 @@ public class chatPage extends AppCompatActivity {
 
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     private void recyclerViewAdapter(){
