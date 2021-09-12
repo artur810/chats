@@ -15,7 +15,7 @@ public class chatPage extends AppCompatActivity {
     Button buttonSend;
     EditText textSend;
     RecyclerView recyclerview;
-    public List<Chat> chats;
+    public List<Message> chats;
     private RecyclerViewAdapter adapter;
 
     @Override
@@ -33,7 +33,7 @@ public class chatPage extends AppCompatActivity {
 
             if(!textSend.getText().toString().trim().isEmpty()){
 
-                chats.add(new Chat(String.valueOf(textSend.getText())));
+                chats.add(new Message(String.valueOf(textSend.getText())));
                 recyclerViewAdapter();
                 textSend.setText(null);
 

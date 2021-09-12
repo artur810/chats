@@ -1,10 +1,10 @@
 package com.example.chats;
 
-public class Chat {
+public class Message {
 
     String text;
 
-    public Chat(String text){
+    public Message(String text){
         this.text = text;
 
     }
