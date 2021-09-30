@@ -10,12 +10,6 @@
         app:showAsAction="ifRoom|collapseActionView" />
 
     <item
-        android:id="@+id/add"
-        android:title="add"
-        app:showAsAction="never">
-    </item>
-
-    <item
         android:id="@+id/set_background"
         android:title="set background"
         app:showAsAction="never">

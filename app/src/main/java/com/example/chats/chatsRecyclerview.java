@@ -8,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,6 +63,7 @@ public class chatsRecyclerview extends AppCompatActivity {
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -68,7 +71,9 @@ public class chatsRecyclerview extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                if(adapter != null){
+                    adapter.getFilter().filter(newText);
+                }
                 return true;
             }
         });
@@ -80,10 +85,6 @@ public class chatsRecyclerview extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch(item.getItemId()){
-            case R.id.add:
-                Intent intent = new Intent(this, chatPage.class);
-                startActivity(intent);
-                break;
             case R.id.set_background:
                 this.getWindow().getDecorView().setBackgroundColor(Color.RED);
                 break;
