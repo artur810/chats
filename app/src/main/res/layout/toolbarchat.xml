@@ -10,10 +10,9 @@
         android:id="@+id/imageProfile"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/ic_launcher_foreground"
+        android:background="@drawable/ic_baseline_image_24"
         android:contentDescription="profile picture"
+        android:scaleType="fitCenter"
         />
 
 </androidx.appcompat.widget.Toolbar>

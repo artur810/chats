@@ -22,6 +22,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,11 +75,10 @@ public class chatPage extends AppCompatActivity {
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                imageChooser();
+                Fragment fragment = new Fragment(imageProfile);
+                fragment.show(getSupportFragmentManager(), "dialog fragment");
+//                imageChooser();
             }
-
-
-
         });
 
     }
