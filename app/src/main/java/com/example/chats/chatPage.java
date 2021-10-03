@@ -20,7 +20,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import java.util.List;
 
 public class chatPage extends AppCompatActivity {
 
@@ -28,9 +27,11 @@ public class chatPage extends AppCompatActivity {
     EditText textSend;
     Toolbar toolbar;
     ImageButton imageProfile;
-    RecyclerView recyclerview;
-    public List<Message> chats;
-    private RecyclerViewAdapterChat adapter;
+
+    private RecyclerView recyclerview;
+    private RecyclerViewChat adapter;
+    private RecyclerView.LayoutManager LayoutManager;
+    private ArrayList<Message> chats;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class chatPage extends AppCompatActivity {
         Bitmap bitmap = intent.getParcelableExtra("Bitmap");
 
         chats = new ArrayList<>();
-        recyclerview = findViewById(R.id.recyclerview);
+        RecyclerViewAdapter();
 
         buttonSend = findViewById(R.id.buttonSend);
         textSend = findViewById(R.id.textSend);
@@ -59,8 +60,8 @@ public class chatPage extends AppCompatActivity {
 
             if(!textSend.getText().toString().trim().isEmpty()){
 
-                chats.add(new Message(String.valueOf(textSend.getText())));
-                RecyclerViewAdapterChat();
+                int position = adapter.getItemCount();
+                addItem(position);
                 textSend.setText(null);
 
             }
@@ -72,6 +73,16 @@ public class chatPage extends AppCompatActivity {
             fragment.show(getSupportFragmentManager(), "dialog fragment");
         });
 
+    }
+
+    public void addItem (int position){
+        chats.add(new Message(String.valueOf(textSend.getText())));
+        adapter.notifyItemInserted(position);
+    }
+
+    public void removeItem (int position){
+        chats.remove(position);
+        adapter.notifyItemRemoved(position);
     }
 
     @Override
@@ -110,7 +121,7 @@ public class chatPage extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.delete:
                 chats = new ArrayList<>();
-                RecyclerViewAdapterChat();
+                RecyclerViewAdapter();
                 break;
             case R.id.set_background:
                 this.getWindow().getDecorView().setBackgroundColor(Color.RED);
@@ -124,14 +135,20 @@ public class chatPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void RecyclerViewAdapterChat(){
+    private void RecyclerViewAdapter(){
+
+        recyclerview = findViewById(R.id.recyclerview);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
         recyclerview.setHasFixedSize(true);
+        LayoutManager = new LinearLayoutManager(this);
+        adapter = new RecyclerViewChat(this, chats);
+
         recyclerview.setLayoutManager(linearLayoutManager);
-        adapter = new RecyclerViewAdapterChat(this, chats);
         recyclerview.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(position -> removeItem(position));
 
     }
 
