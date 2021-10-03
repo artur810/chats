@@ -24,6 +24,7 @@ public class RecyclerViewAdapterChat extends RecyclerView.Adapter<RecyclerViewAd
         //for search method
         fullList = new ArrayList<>();
         fullList.addAll(list);
+
     }
 
     @Override

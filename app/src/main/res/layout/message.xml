@@ -12,6 +12,7 @@
         tools:ignore="MissingConstraints"
         android:background="@drawable/border">
 
+
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
@@ -20,6 +21,5 @@
             tools:ignore="MissingConstraints" />
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,18 +3,15 @@ package com.example.chats;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +19,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.snackbar.Snackbar;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +31,6 @@ public class chatPage extends AppCompatActivity {
     RecyclerView recyclerview;
     public List<Message> chats;
     private RecyclerViewAdapterChat adapter;
-    int SELECT_PICTURE = 200;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +41,7 @@ public class chatPage extends AppCompatActivity {
 
         Intent intent = getIntent();
         String num = intent.getStringExtra("num");
+        Bitmap bitmap = intent.getParcelableExtra("Bitmap");
 
         chats = new ArrayList<>();
         recyclerview = findViewById(R.id.recyclerview);
@@ -58,6 +52,7 @@ public class chatPage extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("איש קשר " + num);
         imageProfile = findViewById(R.id.imageProfile);
+        imageProfile.setImageBitmap(bitmap);
 
 
         buttonSend.setOnClickListener( v -> {
@@ -72,48 +67,11 @@ public class chatPage extends AppCompatActivity {
 
         });
 
-        imageProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Fragment fragment = new Fragment(imageProfile);
-                fragment.show(getSupportFragmentManager(), "dialog fragment");
-//                imageChooser();
-            }
+        imageProfile.setOnClickListener(arg0 -> {
+            Fragment fragment = new Fragment(imageProfile);
+            fragment.show(getSupportFragmentManager(), "dialog fragment");
         });
 
-    }
-
-    void imageChooser() {
-
-        // create an instance of the
-        // intent of the type image
-        Intent i = new Intent();
-        i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);
-
-        // pass the constant to compare it
-        // with the returned requestCode
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
-    }
-
-    // this function is triggered when user
-    // selects the image from the imageChooser
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
-            if (requestCode == SELECT_PICTURE) {
-                // Get the url of the image from data
-                Uri selectedImageUri = data.getData();
-                if (null != selectedImageUri) {
-                    // update the preview image in the layout
-                    imageProfile.setImageURI(selectedImageUri);
-                }
-            }
-        }
     }
 
     @Override

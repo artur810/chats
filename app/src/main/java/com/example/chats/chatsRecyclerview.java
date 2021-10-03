@@ -8,8 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,16 +17,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import java.util.ArrayList;
-import java.util.List;
 
 public class chatsRecyclerview extends AppCompatActivity {
 
-    private RecyclerViewAdapter adapter;
-    public List <Chat> chatsPage;
     int n = 0;
-    RecyclerView recyclerview;
     Toolbar toolbar;
     ExtendedFloatingActionButton add;
+
+    private RecyclerView recyclerview;
+    private RecyclerViewAllChats mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<Chat> chatsPage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,16 +37,42 @@ public class chatsRecyclerview extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         chatsPage = new ArrayList<>();
-        recyclerview = findViewById(R.id.recyclerview);
+        RecyclerViewAdapter();
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         add = findViewById(R.id.add);
 
         add.setOnClickListener(v -> {
-            chatsPage.add(new Chat(String.valueOf(n)));
-            RecyclerViewAdapter();
+            int position = mAdapter.getItemCount();
+            addItem(position);
             n++;
         });
+    }
+
+    public void addItem (int position){
+        chatsPage.add(new Chat(R.drawable.ic_baseline_image_24, String.valueOf(n)));
+        mAdapter.notifyItemInserted(position);
+    }
+
+    public void removeItem (int position){
+        chatsPage.remove(position);
+        mAdapter.notifyItemRemoved(position);
+    }
+
+    private void RecyclerViewAdapter(){
+
+        recyclerview = findViewById(R.id.recyclerview);
+
+        recyclerview.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new RecyclerViewAllChats (this, chatsPage);
+
+        recyclerview.setLayoutManager(mLayoutManager);
+        recyclerview.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(position -> removeItem(position));
+
     }
 
 
@@ -71,8 +96,8 @@ public class chatsRecyclerview extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(adapter != null){
-                    adapter.getFilter().filter(newText);
+                if(mAdapter != null){
+                    mAdapter.getFilter().filter(newText);
                 }
                 return true;
             }
@@ -95,15 +120,6 @@ public class chatsRecyclerview extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void RecyclerViewAdapter(){
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerview.setHasFixedSize(true);
-        recyclerview.setLayoutManager(linearLayoutManager);
-        adapter = new RecyclerViewAdapter(this, chatsPage);
-        recyclerview.setAdapter(adapter);
 
     }
 
