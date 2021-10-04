@@ -27,6 +27,7 @@ public class chatPage extends AppCompatActivity {
     EditText textSend;
     Toolbar toolbar;
     ImageButton imageProfile;
+    public static String num;
 
     private RecyclerView recyclerview;
     private RecyclerViewChat adapter;
@@ -41,17 +42,21 @@ public class chatPage extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Intent intent = getIntent();
-        String num = intent.getStringExtra("num");
+        num = intent.getStringExtra("num");
         Bitmap bitmap = intent.getParcelableExtra("Bitmap");
 
-        chats = new ArrayList<>();
+        if(PrefConfigMessage.readListFromPref(getApplicationContext(), num) != null && !PrefConfigMessage.readListFromPref(getApplicationContext(), num).isEmpty()){
+            chats = PrefConfigMessage.readListFromPref(getApplicationContext(), num);
+        }else {
+            chats = new ArrayList<>();
+        }
         RecyclerViewAdapter();
 
         buttonSend = findViewById(R.id.buttonSend);
         textSend = findViewById(R.id.textSend);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("איש קשר " + num);
+        getSupportActionBar().setTitle(num);
         imageProfile = findViewById(R.id.imageProfile);
         imageProfile.setImageBitmap(bitmap);
 
@@ -78,11 +83,13 @@ public class chatPage extends AppCompatActivity {
     public void addItem (int position){
         chats.add(new Message(String.valueOf(textSend.getText())));
         adapter.notifyItemInserted(position);
+        PrefConfigMessage.writeListInPref(getApplicationContext(), chats, num);
     }
 
     public void removeItem (int position){
         chats.remove(position);
         adapter.notifyItemRemoved(position);
+        PrefConfigMessage.writeListInPref(getApplicationContext(), chats, num);
     }
 
     @Override
@@ -90,7 +97,7 @@ public class chatPage extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_chat, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        MenuItem searchItem = menu.findItem(R.id.action_search_chat);
 
         SearchView searchView = (SearchView) searchItem.getActionView();
 

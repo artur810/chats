@@ -1,6 +1,9 @@
 package com.example.chats;
 
+import static com.example.chats.chatPage.num;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,7 +23,7 @@ import java.util.ArrayList;
 
 public class chatsRecyclerview extends AppCompatActivity {
 
-    int n = 0;
+    int n=0;
     Toolbar toolbar;
     ExtendedFloatingActionButton add;
 
@@ -29,6 +32,8 @@ public class chatsRecyclerview extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Chat> chatsPage;
 
+    private static final String NUMBER = "number";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +41,14 @@ public class chatsRecyclerview extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        chatsPage = new ArrayList<>();
+//        SharedPreferences prefs = getSharedPreferences(NUMBER, MODE_PRIVATE);
+//        n = prefs.getInt("num", 0);
+
+        if(PrefConfigChats.readListFromPref(getApplicationContext()) != null && !PrefConfigChats.readListFromPref(getApplicationContext()).isEmpty()){
+            chatsPage = PrefConfigChats.readListFromPref(getApplicationContext());
+        }else {
+            chatsPage = new ArrayList<>();
+        }
         RecyclerViewAdapter();
 
         toolbar = findViewById(R.id.toolbar);
@@ -47,17 +59,22 @@ public class chatsRecyclerview extends AppCompatActivity {
             int position = mAdapter.getItemCount();
             addItem(position);
             n++;
+            SharedPreferences.Editor editor = getSharedPreferences(NUMBER, MODE_PRIVATE).edit();
+            editor.putInt("num", n);
+            editor.apply();
         });
     }
 
     public void addItem (int position){
-        chatsPage.add(new Chat(R.drawable.ic_baseline_image_24, String.valueOf(n)));
+        chatsPage.add(new Chat(R.drawable.ic_baseline_image_24, String.valueOf("איש קשר " + n)));
         mAdapter.notifyItemInserted(position);
+        PrefConfigChats.writeListInPref(getApplicationContext(), chatsPage);
     }
 
     public void removeItem (int position){
         chatsPage.remove(position);
         mAdapter.notifyItemRemoved(position);
+        PrefConfigChats.writeListInPref(getApplicationContext(), chatsPage);
     }
 
     private void RecyclerViewAdapter(){
@@ -75,7 +92,6 @@ public class chatsRecyclerview extends AppCompatActivity {
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -86,6 +102,8 @@ public class chatsRecyclerview extends AppCompatActivity {
         SearchView searchView = (SearchView) searchItem.getActionView();
 
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setQueryHint("הקלד לחיפוש");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -101,6 +119,7 @@ public class chatsRecyclerview extends AppCompatActivity {
                 }
                 return true;
             }
+
         });
 
         return super.onCreateOptionsMenu(menu);

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -17,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllChats.RecyclerViewAllChatsViewHolder>{
+public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllChats.RecyclerViewAllChatsViewHolder> {
 
-    private ArrayList<Chat> chat;
-    private ArrayList<Chat> fullList; //for search option
+    private List<Chat> chat;
+    private List<Chat> fullList; //for search option
     private onItemClickListener mListener;
     private Context context;
 
@@ -44,8 +43,8 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
 
     }
 
-    public RecyclerViewAllChats(Context context, ArrayList<Chat> exampleList){
-        this.chat = exampleList;
+    public RecyclerViewAllChats(Context context, ArrayList<Chat> chat){
+        this.chat = chat;
         this.context = context;
 
         //for search method
@@ -77,6 +76,7 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
 
             context.startActivity(intent);
         });
+
     }
 
     @Override
@@ -103,6 +103,7 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION){
                         listener.onDeleteClick(position);
+                        PrefConfigMessage.deleteListInPref(itemView.getContext(), String.valueOf(num.getText()));
                     }
                 }
             });
@@ -117,7 +118,7 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
 
-                ArrayList <Chat> filteredList = new ArrayList<>();
+                List <Chat> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0) {
 
@@ -129,7 +130,6 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
 
                     for (Chat chat : fullList) {
                         if (chat.getText().toLowerCase().contains(filterPattern)) {
-                            Toast.makeText(context, ""+constraint, Toast.LENGTH_SHORT).show();
                             filteredList.add(chat);
                         }
                     }
