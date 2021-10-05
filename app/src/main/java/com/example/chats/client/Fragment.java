@@ -1,4 +1,4 @@
-package com.example.chats;
+package com.example.chats.client;
 
 import static android.app.Activity.RESULT_OK;
 import android.Manifest;
@@ -20,6 +20,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.chats.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

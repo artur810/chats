@@ -13,14 +13,14 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Chats">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".client.SettingsActivity"
             android:exported="true"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".chatPage"
+            android:name=".client.chatPage"
             android:exported="true"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".chatsRecyclerview"
+        <activity android:name=".client.chatsRecyclerview"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.chats;
+package com.example.chats.client;
 
 import android.content.Context;
 import android.content.SharedPreferences;

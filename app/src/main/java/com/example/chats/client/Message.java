@@ -1,4 +1,4 @@
-package com.example.chats;
+package com.example.chats.client;
 
 public class Message {
 

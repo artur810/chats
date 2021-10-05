@@ -1,6 +1,4 @@
-package com.example.chats;
-
-import static com.example.chats.chatPage.num;
+package com.example.chats.client;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +16,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.chats.R;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import java.util.ArrayList;
 
