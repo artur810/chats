@@ -21,15 +21,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Fragment extends DialogFragment {
 
     private static final int PERMISSION_C0DE = 1000;
     Button picture, camera;
     int SELECT_PICTURE = 200;
-    ImageButton button;
+    CircleImageView button;
     Uri image_uri;
 
-    public Fragment(ImageButton button) {
+    public Fragment(CircleImageView button) {
         this.button = button;
     }
 

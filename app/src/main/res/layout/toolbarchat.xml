@@ -6,13 +6,13 @@
     android:theme="@style/CustomToolbarStyle"
     app:popupTheme="@style/CustomPopupStyle">
 
-    <ImageButton
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/imageProfile"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/ic_baseline_image_24"
-        android:background="@android:color/transparent"
-        android:contentDescription="profile picture"
-        />
+        app:civ_border_width="2dp"
+        app:civ_border_color="#00000000"/>
 
 </androidx.appcompat.widget.Toolbar>
