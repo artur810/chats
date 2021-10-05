@@ -22,12 +22,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class chatPage extends AppCompatActivity {
 
     Button buttonSend;
     EditText textSend;
     Toolbar toolbar;
-    ImageButton imageProfile;
+    CircleImageView imageProfile;
     public static String num;
 
     private RecyclerView recyclerview;

@@ -10,14 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
+<!--        <ImageButton-->
+<!--            android:id="@+id/imageProfileChat"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:src="@drawable/ic_baseline_image_24"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            tools:ignore="MissingConstraints" />-->
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/imageProfileChat"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@android:color/transparent"
-            android:scaleType="centerInside"
             android:src="@drawable/ic_baseline_image_24"
-            app:layout_constraintStart_toStartOf="parent"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#00000000"
             tools:ignore="MissingConstraints" />
 
         <LinearLayout

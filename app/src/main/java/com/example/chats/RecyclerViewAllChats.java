@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllChats.RecyclerViewAllChatsViewHolder> {
 
     private List<Chat> chat;
@@ -83,7 +85,8 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
     public static class RecyclerViewAllChatsViewHolder extends RecyclerView.ViewHolder{
 
         public TextView num;
-        public ImageButton imageProfile, deleteChat;
+        public CircleImageView imageProfile;
+        public ImageButton deleteChat;
         public CardView RecyclerViewCard;
 
         public RecyclerViewAllChatsViewHolder(@NonNull View itemView, onItemClickListener listener) {
