@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
     private List<Chat> chat;
     private List<Chat> fullList; //for search option
     private onItemClickListener mListener;
-    private Context context;
+    private final Context context;
 
     public interface onItemClickListener{
         void onDeleteClick(int position);
@@ -31,8 +32,7 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
         mListener = listener;
     }
 
-    @NonNull
-    @Override
+    @Override @NonNull
     public RecyclerViewAllChatsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_chats, parent, false);
@@ -40,7 +40,6 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
         RecyclerViewAllChatsViewHolder evhac = new RecyclerViewAllChatsViewHolder(v, mListener);
 
         return evhac;
-
     }
 
     public RecyclerViewAllChats(Context context, ArrayList<Chat> chat){
@@ -62,7 +61,6 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
             Fragment fragment = new Fragment(holder.imageProfile);
             AppCompatActivity activity = ((AppCompatActivity)context);
             fragment.show(activity.getSupportFragmentManager(), "dialog fragment");
-
         });
 
         holder.RecyclerViewCard.setOnClickListener(v -> {
@@ -70,13 +68,11 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
             intent.putExtra("num", String.valueOf(holder.num.getText()));
 
             holder.imageProfile.setDrawingCacheEnabled(true);
-            Bitmap b= holder.imageProfile.getDrawingCache();
-
+            Bitmap b = holder.imageProfile.getDrawingCache();
             intent.putExtra("Bitmap", b);
 
             context.startActivity(intent);
         });
-
     }
 
     @Override
@@ -107,7 +103,6 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
                     }
                 }
             });
-
         }
     }
 
@@ -123,7 +118,6 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
                 if (constraint == null || constraint.length() == 0) {
 
                     filteredList.addAll(fullList);
-
                 } else {
 
                     String filterPattern = constraint.toString().toLowerCase().trim();
@@ -142,7 +136,6 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-
                 chat.clear();
                 chat.addAll((List)results.values);
                 notifyDataSetChanged();

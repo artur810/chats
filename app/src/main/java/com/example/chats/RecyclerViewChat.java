@@ -42,7 +42,6 @@ public class RecyclerViewChat extends RecyclerView.Adapter<RecyclerViewChat.Recy
         Message currentItem = list.get(position);
 
         holder.text.setText(currentItem.getText());
-
     }
 
     public RecyclerViewChat(Context context, ArrayList<Message> exampleList){

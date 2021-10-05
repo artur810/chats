@@ -1,5 +1,6 @@
 package com.example.chats;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -70,14 +71,12 @@ public class chatPage extends AppCompatActivity {
                 textSend.setText(null);
 
             }
-
         });
 
         imageProfile.setOnClickListener(arg0 -> {
             Fragment fragment = new Fragment(imageProfile);
             fragment.show(getSupportFragmentManager(), "dialog fragment");
         });
-
     }
 
     public void addItem (int position){
@@ -122,7 +121,8 @@ public class chatPage extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
+
+    @Override @SuppressLint("NonConstantResourceId")
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch(item.getItemId()){

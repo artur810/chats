@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/USER/AndroidStudioProjects/chats/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/chats/app/src/main/res/drawable/border.xml" value="0.2703125" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/chats/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2703125" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/chats/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.2703125" />
@@ -28,6 +27,10 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/chats/app/src/main/res/menu/search_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/chats/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/chats/app/src/main/res/xml/root_preferences.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/yechi/AndroidStudioProjects/MyApplication/chats/app/src/main/res/drawable/circular_image.xml" value="0.2703125" />
+        <entry key="..\:/Users/yechi/AndroidStudioProjects/MyApplication/chats/app/src/main/res/layout/card_chats.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/yechi/AndroidStudioProjects/MyApplication/chats/app/src/main/res/layout/chat_page.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/yechi/AndroidStudioProjects/MyApplication/chats/app/src/main/res/layout/chats_recyclerview.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
