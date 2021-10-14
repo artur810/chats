@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllChats.RecyclerViewAllChatsViewHolder> {
 
-    private List<Chat> chat;
+    private ArrayList<Chat> chat;
     private List<Chat> fullList; //for search option
     private onItemClickListener mListener;
     private final Context context;
@@ -63,6 +62,7 @@ public class RecyclerViewAllChats extends RecyclerView.Adapter<RecyclerViewAllCh
             Fragment fragment = new Fragment(holder.imageProfile);
             AppCompatActivity activity = ((AppCompatActivity)context);
             fragment.show(activity.getSupportFragmentManager(), "dialog fragment");
+//            PrefConfigChats.writeListInPref(holder.itemView.getContext(), chat);
         });
 
         holder.RecyclerViewCard.setOnClickListener(v -> {

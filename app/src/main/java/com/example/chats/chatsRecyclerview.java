@@ -1,7 +1,5 @@
 package com.example.chats;
 
-import static com.example.chats.chatPage.num;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -41,9 +39,6 @@ public class chatsRecyclerview extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-//        SharedPreferences prefs = getSharedPreferences(NUMBER, MODE_PRIVATE);
-//        n = prefs.getInt("num", 0);
-
         if(PrefConfigChats.readListFromPref(getApplicationContext()) != null && !PrefConfigChats.readListFromPref(getApplicationContext()).isEmpty()){
             chatsPage = PrefConfigChats.readListFromPref(getApplicationContext());
         }else {
@@ -69,6 +64,7 @@ public class chatsRecyclerview extends AppCompatActivity {
         chatsPage.add(new Chat(R.drawable.ic_baseline_image_24, String.valueOf("איש קשר " + n)));
         mAdapter.notifyItemInserted(position);
         PrefConfigChats.writeListInPref(getApplicationContext(), chatsPage);
+        System.out.println(chatsPage);
     }
 
     public void removeItem (int position){

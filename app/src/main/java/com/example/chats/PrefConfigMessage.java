@@ -3,8 +3,6 @@ package com.example.chats;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -37,7 +35,6 @@ public class PrefConfigMessage {
     }
 
     public static void deleteListInPref(Context context, String num){
-        Toast.makeText(context.getApplicationContext(), ""+num, Toast.LENGTH_SHORT).show();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         pref.edit().remove(num).commit();
 
